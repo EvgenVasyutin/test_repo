@@ -1,0 +1,452 @@
+[
+    {
+        "model": "books.category",
+        "pk": 2,
+        "fields": {
+            "name": "Художня література"
+        }
+    },
+    {
+        "model": "books.category",
+        "pk": 3,
+        "fields": {
+            "name": "Детективи та трилери"
+        }
+    },
+    {
+        "model": "books.category",
+        "pk": 4,
+        "fields": {
+            "name": "Наукова фантастика та фентезі"
+        }
+    },
+    {
+        "model": "books.category",
+        "pk": 5,
+        "fields": {
+            "name": "Романи"
+        }
+    },
+    {
+        "model": "books.category",
+        "pk": 6,
+        "fields": {
+            "name": "Історична література"
+        }
+    },
+    {
+        "model": "books.category",
+        "pk": 7,
+        "fields": {
+            "name": "Біографії та мемуари"
+        }
+    },
+    {
+        "model": "books.category",
+        "pk": 8,
+        "fields": {
+            "name": "Саморозвиток та особистість"
+        }
+    },
+    {
+        "model": "books.category",
+        "pk": 9,
+        "fields": {
+            "name": "Бізнес та економіка"
+        }
+    },
+    {
+        "model": "books.category",
+        "pk": 10,
+        "fields": {
+            "name": "Подорожі та пригоди"
+        }
+    },
+    {
+        "model": "books.category",
+        "pk": 11,
+        "fields": {
+            "name": "Кулінарія та їжа"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 1,
+        "fields": {
+            "first_name": "Тарас",
+            "last_name": "Шевченко"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 2,
+        "fields": {
+            "first_name": "Леся",
+            "last_name": "Українка"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 3,
+        "fields": {
+            "first_name": "Іван",
+            "last_name": "Франко"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 4,
+        "fields": {
+            "first_name": "Микола",
+            "last_name": "Гоголь"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 5,
+        "fields": {
+            "first_name": "Марина",
+            "last_name": "Цвєтаєва"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 6,
+        "fields": {
+            "first_name": "Олесь",
+            "last_name": "Гончар"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 7,
+        "fields": {
+            "first_name": "Ліна",
+            "last_name": "Костенко"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 8,
+        "fields": {
+            "first_name": "Павло",
+            "last_name": "Загребельний"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 9,
+        "fields": {
+            "first_name": "Юрій",
+            "last_name": "Андрухович"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 10,
+        "fields": {
+            "first_name": "Софія",
+            "last_name": "Андрухович"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 11,
+        "fields": {
+            "first_name": "Іван",
+            "last_name": "Багряний"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 12,
+        "fields": {
+            "first_name": "Василь",
+            "last_name": "Стус"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 13,
+        "fields": {
+            "first_name": "Олесь",
+            "last_name": "Бердник"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 14,
+        "fields": {
+            "first_name": "Любко",
+            "last_name": "Дереш"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 15,
+        "fields": {
+            "first_name": "Олександр",
+            "last_name": "Олесь"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 16,
+        "fields": {
+            "first_name": "Василь",
+            "last_name": "Шкляр"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 17,
+        "fields": {
+            "first_name": "Андрій",
+            "last_name": "Кокотюха"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 18,
+        "fields": {
+            "first_name": "Марко",
+            "last_name": "Вовчок"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 19,
+        "fields": {
+            "first_name": "Володимир",
+            "last_name": "Даля"
+        }
+    },
+    {
+        "model": "books.author",
+        "pk": 20,
+        "fields": {
+            "first_name": "Павло",
+            "last_name": "Губенко"
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 1,
+        "fields": {
+            "title": "Book 1",
+            "picture": null,
+            "author": 1,
+            "category": 2,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 2,
+        "fields": {
+            "title": "Book 2",
+            "picture": null,
+            "author": 2,
+            "category": 3,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 3,
+        "fields": {
+            "title": "Book 3",
+            "picture": null,
+            "author": 3,
+            "category": 4,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 4,
+        "fields": {
+            "title": "Book 4",
+            "picture": null,
+            "author": 4,
+            "category": 5,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 5,
+        "fields": {
+            "title": "Book 5",
+            "picture": null,
+            "author": 5,
+            "category": 6,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 6,
+        "fields": {
+            "title": "Book 6",
+            "picture": null,
+            "author": 6,
+            "category": 7,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 7,
+        "fields": {
+            "title": "Book 7",
+            "picture": null,
+            "author": 7,
+            "category": 8,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 8,
+        "fields": {
+            "title": "Book 8",
+            "picture": null,
+            "author": 8,
+            "category": 9,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 9,
+        "fields": {
+            "title": "Book 9",
+            "picture": null,
+            "author": 9,
+            "category": 10,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 10,
+        "fields": {
+            "title": "Book 10",
+            "picture": null,
+            "author": 10,
+            "category": 2,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 11,
+        "fields": {
+            "title": "Book 11",
+            "picture": null,
+            "author": 11,
+            "category": 3,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 12,
+        "fields": {
+            "title": "Book 12",
+            "picture": null,
+            "author": 12,
+            "category": 4,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 13,
+        "fields": {
+            "title": "Book 13",
+            "picture": null,
+            "author": 13,
+            "category": 5,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 14,
+        "fields": {
+            "title": "Book 14",
+            "picture": null,
+            "author": 14,
+            "category": 6,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 15,
+        "fields": {
+            "title": "Book 15",
+            "picture": null,
+            "author": 15,
+            "category": 7,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 16,
+        "fields": {
+            "title": "Book 16",
+            "picture": null,
+            "author": 16,
+            "category": 8,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 17,
+        "fields": {
+            "title": "Book 17",
+            "picture": null,
+            "author": 17,
+            "category": 9,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 18,
+        "fields": {
+            "title": "Book 18",
+            "picture": null,
+            "author": 18,
+            "category": 10,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 19,
+        "fields": {
+            "title": "Book 19",
+            "picture": null,
+            "author": 19,
+            "category": 2,
+            "owner": 1
+        }
+    },
+    {
+        "model": "books.book",
+        "pk": 20,
+        "fields": {
+            "title": "Book 20",
+            "picture": null,
+            "author": 20,
+            "category": 3,
+            "owner": 1
+        }
+    }
+]
