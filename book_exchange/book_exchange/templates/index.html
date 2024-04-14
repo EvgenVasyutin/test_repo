@@ -1,29 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обмін Книгами</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
     <header>
             <h2>Список усіх книг на обмін</h2>
     </header>
 
     {% for book in books %}
-    <p>
-        Картинка:
-        <br>
-        Категорія: {{ book.category }}
-        <br>
-        Назва книги: {{ book.title }}
-        <br>
-        Автор: {{ book.author }}
-        <br>
-        Власник: {{ book.owner }}
-    </p>
+        <p>
+            Картинка:
+            <br>
+            Категорія: {{ book.category }}
+            <br>
+            Назва книги: {{ book.title }}
+            <br>
+            Автор: {{ book.author }}
+            <br>
+            Власник: {{ book.owner }}
+        </p>
+    {% endfor %}
 
-{% endfor %}
-
-</body>
-</html>
+{% endblock %}
