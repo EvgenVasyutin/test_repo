@@ -24,7 +24,11 @@ class Category(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     picture = models.ForeignKey(
-        Picture, on_delete=models.CASCADE, blank=True, null=True
+        Picture,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name='book_pic',
     )
     author = models.ForeignKey(
         Author, on_delete=models.CASCADE, null=True, blank=True
@@ -35,6 +39,9 @@ class Book(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-id',)
 
     def __str__(self) -> str:
         return f'{self.title}'

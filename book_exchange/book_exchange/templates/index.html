@@ -7,7 +7,7 @@
 
     {% for book in books %}
         <p>
-            Картинка:
+            Картинка: <img src="{{ book.picture.pic.url }}" width=200 class="rounded" alt="{{ book.picture.pic.url }}">
             <br>
             Категорія: {{ book.category }}
             <br>

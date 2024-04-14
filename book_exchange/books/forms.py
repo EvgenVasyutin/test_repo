@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from books.models import Book, Picture
 
 
 class SignUpForm(UserCreationForm):
@@ -56,3 +57,16 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].help_text = (
             '<span class="form-text text-muted"><small>Для підтвердження введіть той самий пароль, що й раніше.</small></span>'
         )
+
+
+class PictureForm(forms.ModelForm):
+    class Meta:
+        model = Picture
+        fields = ('pic',)
+
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = '__all__'
+        exclude = ('owner', 'picture')

@@ -758,6 +758,13 @@
         }
     },
     {
+        "model": "books.category",
+        "pk": 12,
+        "fields": {
+            "name": "Інше"
+        }
+    },
+    {
         "model": "books.book",
         "pk": 1,
         "fields": {

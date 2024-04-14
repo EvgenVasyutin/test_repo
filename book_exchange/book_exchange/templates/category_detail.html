@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<div class="col-md-6 offset-md-3">
     <header>
         <h2>Категорія {{ category.name }}</h2>
     </header>
@@ -18,4 +19,5 @@
             Власник: {{ book.owner }}
         </p>
     {% endfor %}
+    </div>
 {% endblock %}

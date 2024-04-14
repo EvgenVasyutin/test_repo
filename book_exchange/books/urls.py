@@ -8,6 +8,7 @@ from books.views import (
     categories,
     category_detail,
     profile,
+    book_create,
 )
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
         view=category_detail,
         name='category_detail',
     ),
+    path('create_book/', view=book_create, name='book_create'),
     path('profile/<int:user_id>', view=profile, name='profile'),
     path('register/', view=register, name='register'),
     path('login/', view=login_user, name='login'),
