@@ -7,7 +7,7 @@
     <br>
     {% for category in all_categories %}
     <p>
-        {{ category.name }}
+        <a href="{% url 'category_detail' category_id=category.pk %}">{{ category.name }}</a>
     </p>
     {% endfor %}
 {% endblock %}

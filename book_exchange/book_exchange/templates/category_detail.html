@@ -2,10 +2,10 @@
 {% load static %}
 {% block content %}
     <header>
-            <h2>Список усіх книг на обмін</h2>
+        <h2>Категорія {{ category.name }}</h2>
     </header>
-
-    {% for book in books %}
+    <br>
+    {% for book in category_books %}
         <p>
             Картинка:
             <br>
@@ -16,9 +16,6 @@
             Автор: {{ book.author }}
             <br>
             Власник: {{ book.owner }}
-            <br>
-            Cтворено для обміну: {{ book.created_at|date:"d/m/Y H:i:s" }}
         </p>
     {% endfor %}
-
 {% endblock %}

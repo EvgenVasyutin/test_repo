@@ -34,6 +34,8 @@ class Book(models.Model):
     )
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self) -> str:
         return f'{self.title}'
 
@@ -54,6 +56,7 @@ class Exchange(models.Model):
         related_name='to_book_books',
     )
     is_accepted = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return f'{self.from_book.title} -> {self.to_book.title}'
