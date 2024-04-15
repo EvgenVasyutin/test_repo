@@ -10,8 +10,8 @@
             Моя книга: {{ trade.to_book }} -> На книгу: {{ trade.from_book }}
             <br>
             <br>
-            <a href="#" class="btn btn-outline-success">Підтвердити</a>
-            <a href="{% url 'trade_delete' trade_id=trade.id%}" class="btn btn-outline-danger">Відмовити</a>
+            <a href="{% url 'trade_confirm' trade_id=trade.id %}" class="btn btn-outline-success">Підтвердити</a>
+            <a href="{% url 'trade_delete' trade_id=trade.id %}" class="btn btn-outline-danger">Відмовити</a>
         </p>
         <br>
     {% endfor %}

@@ -31,12 +31,14 @@ class Book(models.Model):
         related_name='book_pic',
     )
     author = models.ForeignKey(
-        Author, on_delete=models.CASCADE, null=True, blank=True
+        Author, on_delete=models.CASCADE, null=False, blank=False
     )
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, null=True, blank=True
+        Category, on_delete=models.CASCADE, null=False, blank=False
     )
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=False, blank=False
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
 

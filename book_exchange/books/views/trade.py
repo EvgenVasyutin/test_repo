@@ -34,7 +34,7 @@ def trade_create(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
 
 
 @login_required()
-def trade_delete(request: HttpRequest, trade_id: int) -> HttpResponse:
+def trade_delete(request: HttpRequest, trade_id: int) -> HttpResponseRedirect:
     trade = Trade.objects.get(pk=trade_id)
     if request.user.id == trade.receiver.id:
         trade.delete()
@@ -45,5 +45,11 @@ def trade_delete(request: HttpRequest, trade_id: int) -> HttpResponse:
 
 
 @login_required()
-def trade_confirm(request: HttpRequest) -> HttpResponse:
-    pass
+def trade_confirm(request: HttpRequest, trade_id: int) -> HttpResponseRedirect:
+    trade = Trade.objects.get(pk=trade_id)
+    if request.user.id == trade.receiver.id:
+        trade.delete()
+        messages.success(request, ('Ви успішно підтвердили обмін!'))
+        return redirect('user_trades', request.user.id)
+    else:
+        return redirect('user_trades', request.user.id)
