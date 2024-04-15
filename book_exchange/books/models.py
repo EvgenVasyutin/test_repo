@@ -41,13 +41,27 @@ class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ('-created_at',)
 
     def __str__(self) -> str:
         return f'{self.title}'
 
 
-class Exchange(models.Model):
+class Trade(models.Model):
+    sender = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+        related_name='trade_sender',
+    )
+    receiver = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+        related_name='trade_receiver',
+    )
     from_book = models.ForeignKey(
         Book,
         on_delete=models.CASCADE,
@@ -62,7 +76,7 @@ class Exchange(models.Model):
         blank=False,
         related_name='to_book_books',
     )
-    is_accepted = models.BooleanField()
+    is_accepted = models.BooleanField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:

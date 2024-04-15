@@ -108,6 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -120,6 +124,6 @@ STATIC_URL = "static/"
 STATIC_ROOT = STATIC_ROOT = BASE_DIR / 'static/'
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'DjangoGramm/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'books_images/media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

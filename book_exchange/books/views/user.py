@@ -1,62 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpRequest
-from books.models import Book, Category
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from books.models import Book
 from django.contrib.auth import authenticate, login, logout
-from books.forms import SignUpForm, BookForm, PictureForm
+from books.forms import SignUpForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
-def index(request: HttpRequest) -> HttpResponse:
-    all_books = Book.objects.all()
-    context = {'books': all_books}
-    return render(request, 'index.html', context)
-
-
 @login_required()
-def book_create(request: HttpRequest) -> HttpResponse:
-    book_form = BookForm(request.POST or None)
-    pic_form = PictureForm(request.POST, request.FILES)
-    if request.method == 'POST':
-        if book_form.is_valid() and pic_form.is_valid():
-            pic = pic_form.save()
-            pic.save()
-            book = book_form.save(commit=False)
-            book.owner = request.user
-            book.picture = pic
-            book.save()
-            messages.success(
-                request,
-                ('Ви успішно створили книгу на обмін!'),
-            )
-            return redirect('profile', request.user.id)
-    else:
-        book_form = BookForm()
-        pic_form = PictureForm()
-    context = {'book_form': book_form, 'pic_form': pic_form}
-    return render(request, 'book_create.html', context)
-
-
-def book_delete(request: HttpRequest) -> HttpResponse:
-    pass
-
-
-def categories(request: HttpRequest) -> HttpResponse:
-    all_categories = Category.objects.all()
-    context = {'all_categories': all_categories}
-    return render(request, 'categories.html', context)
-
-
-def category_detail(request: HttpRequest, category_id: int) -> HttpResponse:
-    category = get_object_or_404(Category, pk=category_id)
-    category_books = Book.objects.filter(category=category.id)
-    context = {'category': category, 'category_books': category_books}
-    return render(request, 'category_detail.html', context)
-
-
-@login_required()
-def profile(request: HttpRequest, user_id: int) -> HttpResponse:
+def profile(
+    request: HttpRequest, user_id: int
+) -> HttpResponse | HttpResponseRedirect:
     if request.user.id == user_id:
         user = get_object_or_404(User, pk=user_id)
         user_books = Book.objects.filter(owner=user)
@@ -69,7 +24,7 @@ def profile(request: HttpRequest, user_id: int) -> HttpResponse:
         return redirect('profile', request.user.id)
 
 
-def register(request: HttpRequest) -> HttpResponse:
+def register(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     form = SignUpForm()
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -88,7 +43,7 @@ def register(request: HttpRequest) -> HttpResponse:
     return render(request, 'register.html', context)
 
 
-def login_user(request: HttpRequest) -> HttpResponse:
+def login_user(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -106,7 +61,7 @@ def login_user(request: HttpRequest) -> HttpResponse:
         return render(request, 'login.html', {})
 
 
-def logout_user(request: HttpRequest) -> HttpResponse:
+def logout_user(request: HttpRequest) -> HttpResponseRedirect:
     logout(request)
     messages.success(request, ('Ви успішно вийшли з системи!'))
     return redirect('index')
