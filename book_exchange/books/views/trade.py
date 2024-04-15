@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required()
 def user_trades(request: HttpRequest, user_id: int) -> HttpResponse:
-    trades = Trade.objects.filter(receiver=user_id)
+    trades = Trade.objects.exclude(sender=user_id)
     context = {'trades': trades}
     return render(request, 'trade_detail.html', context)
 

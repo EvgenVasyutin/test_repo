@@ -5,7 +5,7 @@
             <h2>Список усіх книг на обмін</h2>
     </header>
 
-    {% for book in books %}
+    {% for book in page_obj %}
         <p>
             Картинка: <img src="{{ book.picture.pic.url }}" width=200 class="rounded" alt="{{ book.picture.pic.url }}">
             <br>
@@ -20,5 +20,5 @@
             Cтворено для обміну: {{ book.created_at|date:"d/m/Y H:i:s" }}
         </p>
     {% endfor %}
-
+    {% include 'includes/pagination.html' %}
 {% endblock %}

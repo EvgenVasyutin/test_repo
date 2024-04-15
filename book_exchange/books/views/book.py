@@ -4,11 +4,15 @@ from books.models import Book
 from books.forms import BookForm, PictureForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 
 def index(request: HttpRequest) -> HttpResponse:
     all_books = Book.objects.all()
-    context = {'books': all_books}
+    paginator = Paginator(all_books, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {'page_obj': page_obj}
     return render(request, 'index.html', context)
 
 
