@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from books.models import Book
-from books.forms import BookForm, PictureForm
+from books.forms import BookForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from books.forms import CommentForm
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -16,17 +17,29 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, 'index.html', context)
 
 
-@login_required()
+@login_required(login_url='login')
+def book_detail(request: HttpRequest, book_id: int) -> HttpResponse:
+    book = Book.objects.get(pk=book_id)
+    comment_form = CommentForm(request.POST or None)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.author = request.user
+        comment.book = book
+        comment.save()
+        return redirect('book_detail', book_id)
+    else:
+        comment_form = CommentForm()
+    context = {'comment_form': comment_form, 'book': book}
+    return render(request, 'book/book_detail.html', context)
+
+
+@login_required(login_url='login')
 def book_create(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
-    book_form = BookForm(request.POST or None)
-    pic_form = PictureForm(request.POST, request.FILES)
+    book_form = BookForm(request.POST, request.FILES)
     if request.method == 'POST':
-        if book_form.is_valid() and pic_form.is_valid():
-            pic = pic_form.save()
-            pic.save()
+        if book_form.is_valid():
             book = book_form.save(commit=False)
             book.owner = request.user
-            book.picture = pic
             book.save()
             messages.success(
                 request,
@@ -35,22 +48,19 @@ def book_create(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
             return redirect('profile', request.user.id)
     else:
         book_form = BookForm()
-        pic_form = PictureForm()
-    context = {'book_form': book_form, 'pic_form': pic_form}
-    return render(request, 'book_create.html', context)
+    context = {'book_form': book_form}
+    return render(request, 'book/book_create.html', context)
 
 
-@login_required()
-def book_delete(
-    request: HttpRequest, book_id: int
-) -> HttpResponse | HttpResponseRedirect:
+@login_required(login_url='login')
+def book_delete(request: HttpRequest, book_id: int) -> HttpResponseRedirect:
     book = Book.objects.get(pk=book_id)
     if request.user.id == book.owner.id:
         book.delete()
         messages.success(request, ('Книга успішно видалена!'))
         return redirect('profile', request.user.id)
     else:
-        messages.success(
+        messages.error(
             request, ('Ви не можете видалити книгу іншого користувача!')
         )
         return redirect('profile', request.user.id)

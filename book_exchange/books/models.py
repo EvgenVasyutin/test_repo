@@ -2,10 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Picture(models.Model):
-    pic = models.ImageField(upload_to='pictures')
-
-
 class Author(models.Model):
     first_name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
@@ -23,13 +19,7 @@ class Category(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
-    picture = models.ForeignKey(
-        Picture,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-        related_name='book_pic',
-    )
+    picture = models.ImageField(upload_to='pictures')
     author = models.ForeignKey(
         Author, on_delete=models.CASCADE, null=False, blank=False
     )
@@ -78,8 +68,23 @@ class Trade(models.Model):
         blank=False,
         related_name='to_book_books',
     )
-    is_accepted = models.BooleanField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return f'{self.from_book.title} -> {self.to_book.title}'
+
+
+class Comment(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+    book = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        related_name='comment_book',
+        blank=True,
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='comment_user',
+    )

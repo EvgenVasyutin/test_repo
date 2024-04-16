@@ -1,5 +1,5 @@
 MANAGE_PATH = book_exchange/manage.py
-DATA_PATH = book_exchange/books.json
+DATA_PATH = book_exchange/fixtures/books.json
 
 
 migrations:

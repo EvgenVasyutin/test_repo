@@ -1,5 +1,18 @@
 [
     {
+        "model": "admin.logentry",
+        "pk": 1,
+        "fields": {
+            "action_time": "2024-04-15T12:01:53.430Z",
+            "user": 1,
+            "content_type": 4,
+            "object_id": "2",
+            "object_repr": "test_username",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+        }
+    },
+    {
         "model": "auth.permission",
         "pk": 1,
         "fields": {
@@ -400,7 +413,7 @@
         "pk": 1,
         "fields": {
             "password": "pbkdf2_sha256$600000$WQz7wu31EHtaB6LbiaDQCn$bAkRpM4bPdflvicBcM8cvuqaz8mh4wWL036T6n8gXow=",
-            "last_login": null,
+            "last_login": "2024-04-15T12:01:32.149Z",
             "is_superuser": true,
             "username": "admin",
             "first_name": "",
@@ -417,16 +430,16 @@
         "model": "auth.user",
         "pk": 2,
         "fields": {
-            "password": "pbkdf2_sha256$600000$1VQ3mztQFJowzXfkwxPqXV$zH8kNavBQZGKQr2NwrOHL3ttPOse5QLbj43Csndr4eg=",
-            "last_login": "2024-04-14T12:33:03.199Z",
+            "password": "pbkdf2_sha256$600000$tTReWrGtPbeMkoRlrd4Hp7$cskxjWTXPUbRGZQUz3KRV6pPcA9dkI6cfiJLIOt53GA=",
+            "last_login": "2024-04-15T12:04:55.236Z",
             "is_superuser": false,
-            "username": "Test_username",
-            "first_name": "Test_first_name",
-            "last_name": "Test_last_name",
+            "username": "test_user",
+            "first_name": "test_first_name",
+            "last_name": "test_last_name",
             "email": "",
             "is_staff": false,
             "is_active": true,
-            "date_joined": "2024-04-14T12:33:02.748Z",
+            "date_joined": "2024-04-15T12:04:54.789Z",
             "groups": [],
             "user_permissions": []
         }
@@ -517,6 +530,14 @@
         "fields": {
             "app_label": "books",
             "model": "exchange"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "3vrkg78ljqarogvpihc2r62hwvf9w2ya",
+        "fields": {
+            "session_data": ".eJxVjMsOwiAQRf-FtSHlMbS4dO83kGEGpGogKe3K-O_apAvd3nPOfYmA21rC1tMSZhZnYcTpd4tIj1R3wHestyap1XWZo9wVedAur43T83K4fwcFe_nWcUjKRPKaFVOawAFMABQT2sjZZbLZWO_R0-CAKXutwY02K1aIPJJ4fwAEtDjL:1rwL4x:FGnZyT-tCNk4IFEQg9_UEX9abw1l6OtYe3BKzpI89F4",
+            "expire_date": "2024-04-29T12:04:55.238Z"
         }
     },
     {

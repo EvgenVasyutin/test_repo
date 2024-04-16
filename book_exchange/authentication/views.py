@@ -2,13 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from books.models import Book
 from django.contrib.auth import authenticate, login, logout
-from books.forms import SignUpForm
+from authentication.forms import SignUpForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
-@login_required()
+@login_required(login_url='login')
 def profile(
     request: HttpRequest, user_id: int
 ) -> HttpResponse | HttpResponseRedirect:
@@ -16,9 +16,9 @@ def profile(
         user = get_object_or_404(User, pk=user_id)
         user_books = Book.objects.filter(owner=user)
         context = {'user': user, 'user_books': user_books}
-        return render(request, 'profile.html', context)
+        return render(request, 'authentication/profile.html', context)
     else:
-        messages.success(
+        messages.error(
             request, ('Ви не можете змінювати та переглядати інші профілі!')
         )
         return redirect('profile', request.user.id)
@@ -40,7 +40,7 @@ def register(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
             return redirect('index')
     context = {'form': form}
 
-    return render(request, 'register.html', context)
+    return render(request, 'authentication/register.html', context)
 
 
 def login_user(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
@@ -53,12 +53,12 @@ def login_user(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
             messages.success(request, 'Ви увійшли в систему!')
             return redirect('index')
         else:
-            messages.success(
+            messages.error(
                 request, ('Під час входу сталася помилка. Повторіть спробу..')
             )
             return redirect('login')
     else:
-        return render(request, 'login.html', {})
+        return render(request, 'authentication/login.html', {})
 
 
 def logout_user(request: HttpRequest) -> HttpResponseRedirect:

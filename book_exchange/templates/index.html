@@ -7,7 +7,9 @@
 
     {% for book in page_obj %}
         <p>
-            Картинка: <img src="{{ book.picture.pic.url }}" width=200 class="rounded" alt="{{ book.picture.pic.url }}">
+            {% if book.picture %}
+                Картинка: <img src="{{ book.picture.url }}" width=200 class="rounded" alt="{{ book.picture }}">
+            {% endif %}
             <br>
             Категорія: {{ book.category }}
             <br>
@@ -19,6 +21,13 @@
             <br>
             Cтворено для обміну: {{ book.created_at|date:"d/m/Y H:i:s" }}
         </p>
+        <a href="{% url 'book_detail' book_id=book.id %}" class="btn btn-outline-info">Детальніше</a>
     {% endfor %}
+    </p>
+    <ul>
+        {% for comment in book.comment_book.all %}
+            <li>Відгук юзера {{ comment.author.first_name }}: {{ comment.text }}</li>
+        {% endfor %}
+    </ul>
     {% include 'includes/pagination.html' %}
 {% endblock %}
