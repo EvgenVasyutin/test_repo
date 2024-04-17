@@ -81,10 +81,15 @@ class Comment(models.Model):
         Book,
         on_delete=models.CASCADE,
         related_name='comment_book',
-        blank=True,
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='comment_user',
     )
+
+    def __str__(self) -> str:
+        return (
+            f'Коментар користувача {self.author.first_name} '
+            f'до книги {self.book.title}'
+        )
