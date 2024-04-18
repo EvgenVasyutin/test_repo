@@ -24,6 +24,7 @@
             Cтворено для обміну: {{ book.created_at|date:"d/m/Y H:i:s" }}
             <br>
             {% if request.user.id == book.owner.id %}
+                <a href="{% url 'book_edit' book.id %}" class="btn btn-outline-warning">Редагувати</a>
                 <a href="{% url 'book_delete' book.id %}" class="btn btn-outline-danger">Видалити книгу з обміну</a>
             {% endif %}
         </p>

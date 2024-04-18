@@ -53,6 +53,27 @@ def book_create(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
 
 
 @login_required(login_url='login')
+def book_edit(request: HttpRequest, book_id: int) -> HttpResponse:
+    book = get_object_or_404(Book, pk=book_id)
+
+    if request.method == 'POST':
+        book_form = BookForm(request.POST, request.FILES, instance=book)
+        if book_form.is_valid():
+            book = book_form.save(commit=False)
+            book.owner = request.user
+            book.save()
+            messages.success(
+                request,
+                ('Ви успішно оновили книгу!'),
+            )
+            return redirect('profile', request.user.id)
+    else:
+        bok_form = BookForm(instance=book)
+    context = {'book_form': bok_form}
+    return render(request, 'book/book_create.html', context)
+
+
+@login_required(login_url='login')
 def book_delete(request: HttpRequest, book_id: int) -> HttpResponseRedirect:
     book = get_object_or_404(Book, pk=book_id)
     if request.user.id == book.owner.id:
