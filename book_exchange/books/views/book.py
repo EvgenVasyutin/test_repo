@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from books.models import Book
 from books.forms import BookForm
@@ -19,7 +19,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 @login_required(login_url='login')
 def book_detail(request: HttpRequest, book_id: int) -> HttpResponse:
-    book = Book.objects.get(pk=book_id)
+    book = get_object_or_404(Book, pk=book_id)
     comment_form = CommentForm(request.POST or None)
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
@@ -54,7 +54,7 @@ def book_create(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
 
 @login_required(login_url='login')
 def book_delete(request: HttpRequest, book_id: int) -> HttpResponseRedirect:
-    book = Book.objects.get(pk=book_id)
+    book = get_object_or_404(Book, pk=book_id)
     if request.user.id == book.owner.id:
         book.delete()
         messages.success(request, ('Книга успішно видалена!'))

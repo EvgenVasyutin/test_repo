@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpRequest, HttpResponseRedirect
 from books.models import Comment
 from django.contrib import messages
@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 def comment_delete(
     request: HttpRequest, comment_id: int
 ) -> HttpResponseRedirect:
-    comment = Comment.objects.get(pk=comment_id)
+    comment = get_object_or_404(Comment, pk=comment_id)
     book = comment.book.id
     if request.user.id == comment.author.id:
         comment.delete()

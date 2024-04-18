@@ -40,6 +40,12 @@ class Book(models.Model):
 
 
 class Trade(models.Model):
+
+    class StatusChoice(models.TextChoices):
+        Accepted = 'Прийнято'
+        Rejected = 'Відхилено'
+        Pending = 'В очікуванні'
+
     sender = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -68,10 +74,15 @@ class Trade(models.Model):
         blank=False,
         related_name='to_book_books',
     )
+    status = models.CharField(
+        max_length=120,
+        choices=StatusChoice.choices,
+        default=StatusChoice.Pending,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return f'{self.from_book.title} -> {self.to_book.title}'
+        return f'{self.from_book.title} -> {self.to_book.title}: {self.status}'
 
 
 class Comment(models.Model):

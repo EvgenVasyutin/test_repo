@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <style>
+        .status {
+            font-weight: bold;
+        }
+        .status.accepted {
+            color: green;
+        }
+        .status.rejected {
+            color: red;
+        }
+        .status.pending {
+            color: blue;
+        }
+    </style>
     <header>
         <h2>Мої пропозиції</h2>
     </header>
@@ -8,10 +22,14 @@
     {% for trade in trades %}
         <p>
             Моя книга: {{ trade.to_book }} -> На книгу: {{ trade.from_book }}
+            <p>
+            Статус запиту: <span class="status {% if trade.status == 'Прийнято' %}accepted{% elif trade.status == 'Відхилено' %}rejected{% else %}pending{% endif %}">{{ trade.status }}</span>
             <br>
             <br>
-            <a href="{% url 'trade_confirm' trade_id=trade.id %}" class="btn btn-outline-success">Підтвердити</a>
-            <a href="{% url 'trade_delete' trade_id=trade.id %}" class="btn btn-outline-danger">Відмовити</a>
+            {% if trade.status != 'Прийнято' and trade.status != 'Відхилено' %}
+                <a href="{% url 'trade_confirm' trade_id=trade.id %}" class="btn btn-outline-success">Прийняти</a>
+                <a href="{% url 'trade_delete' trade_id=trade.id %}" class="btn btn-outline-danger">Відмовити</a>
+            {% endif %}
         </p>
         <br>
     {% endfor %}

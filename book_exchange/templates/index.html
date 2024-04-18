@@ -21,7 +21,7 @@
             <br>
             Cтворено для обміну: {{ book.created_at|date:"d/m/Y H:i:s" }}
         </p>
-        <a href="{% url 'book_detail' book_id=book.id %}" class="btn btn-outline-info">Детальніше</a>
+            <a href="{% url 'book_detail' book_id=book.id %}" class="btn btn-outline-info">Детальніше</a>
         <p>
         <ul>
             {% for comment in book.comment_book.all %}
