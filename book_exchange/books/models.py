@@ -77,7 +77,6 @@ class Trade(models.Model):
     status = models.CharField(
         max_length=120,
         choices=StatusChoice.choices,
-        default=StatusChoice.Pending,
     )
     created_at = models.DateTimeField(auto_now_add=True)
 

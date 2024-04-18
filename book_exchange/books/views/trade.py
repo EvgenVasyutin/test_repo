@@ -20,7 +20,8 @@ def trade_create(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         if trade_form.is_valid():
             trade = trade_form.save(commit=False)
             trade.sender = request.user
-            trade.receiver = trade_form.cleaned_data['to_book'].owner
+            trade.receiver = trade_form.cleaned_data['from_book'].owner
+            trade.status = Trade.StatusChoice.Pending
             trade.save()
             messages.success(
                 request,
@@ -46,12 +47,11 @@ def trade_delete(request: HttpRequest, trade_id: int) -> HttpResponseRedirect:
 
 
 @login_required(login_url='login')
-def trade_confirm(request: HttpRequest, trade_id: int) -> HttpResponseRedirect:
+def trade_confirm(request, trade_id):
     trade = get_object_or_404(Trade, pk=trade_id)
-    if request.user.id == trade.receiver.id:
-        trade.status = Trade.StatusChoice.Accepted
-        trade.save()
-        messages.success(request, ('Ви успішно підтвердили обмін!'))
-        return redirect('user_trades', request.user.id)
-    else:
-        return redirect('user_trades', request.user.id)
+    if request.user == trade.receiver:
+        if trade.status == Trade.StatusChoice.Pending:
+            trade.status = Trade.StatusChoice.Accepted
+            trade.save()
+            messages.success(request, 'Ви успішно підтвердили обмін!')
+    return redirect('user_trades', request.user.id)
