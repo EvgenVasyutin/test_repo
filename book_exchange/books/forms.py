@@ -23,15 +23,13 @@ class TradeForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super(TradeForm, self).__init__(*args, **kwargs)
         if user:
-            self.fields['to_book'].queryset = Book.objects.filter(owner=user)
-            self.fields['from_book'].queryset = Book.objects.exclude(
-                owner=user
-            )
+            self.fields['from_book'].queryset = Book.objects.filter(owner=user)
+            self.fields['to_book'].queryset = Book.objects.exclude(owner=user)
 
     class Meta:
         model = Trade
         fields = ('from_book', 'to_book')
         labels = {
-            'to_book': 'Книга, яку ви пропонуєте',
-            'from_book': 'Книга, яку ви хочете отримати',
+            'to_book': 'Книга, яку ви хочете отримати',
+            'from_book': 'Книга, яку ви пропонуєте',
         }

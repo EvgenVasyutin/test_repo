@@ -54,6 +54,7 @@ def book_create(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
 
 @login_required(login_url='login')
 def book_edit(request: HttpRequest, book_id: int) -> HttpResponse:
+    is_edit = True
     book = get_object_or_404(Book, pk=book_id)
 
     if request.method == 'POST':
@@ -69,7 +70,7 @@ def book_edit(request: HttpRequest, book_id: int) -> HttpResponse:
             return redirect('profile', request.user.id)
     else:
         bok_form = BookForm(instance=book)
-    context = {'book_form': bok_form}
+    context = {'book_form': bok_form, 'is_edit': is_edit}
     return render(request, 'book/book_create.html', context)
 
 

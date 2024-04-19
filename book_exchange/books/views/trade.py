@@ -20,8 +20,7 @@ def trade_create(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         if trade_form.is_valid():
             trade = trade_form.save(commit=False)
             trade.sender = request.user
-            trade.receiver = trade_form.cleaned_data['from_book'].owner
-            trade.status = Trade.StatusChoice.Pending
+            trade.receiver = trade_form.cleaned_data['to_book'].owner
             trade.save()
             messages.success(
                 request,
